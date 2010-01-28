@@ -1,5 +1,6 @@
 ﻿package com.sebleedelisle.maths 
 {
+	import flash.display.LineScaleMode;
 	import flash.display.Graphics;
 
 	/**
@@ -10,6 +11,10 @@
 	{
 		public var firstPoint : Vector3; 
 		public var beziers : Array;
+		public var points : Array; 
+		public var controlPoints1 : Array; 
+		public var controlPoints2 : Array; 
+		
 		public var lengths : Array;
 		public var totalLength : Number; 
 
@@ -17,11 +22,34 @@
 		{
 			beziers = new Array(); 
 			lengths = new Array(); 
+			points = new Array(); 
+			controlPoints1 = new Array(); 
+			controlPoints2 = new Array(); 
+			
 			totalLength = 0; 
 		}
 
-		public function addPoint(p : Vector3) : void
+		public function addPoint(p : Vector3, c1 : Vector3 = null, c2 : Vector3 = null) : void
 		{
+			if(!c1) c1 = p.clone(); 
+			if(!c2) c2 = p.clone(); 
+			
+			points.push(p); 
+			controlPoints1.push(c1); 
+			controlPoints2.push(c2); 
+			
+			if(points.length>1)
+			{
+				//var lastPoint : Bezier3 = beziers[beziers.length-1];
+				var bezier : Bezier3 = new Bezier3(points[points.length-2], controlPoints2[points.length-2], p, c1); 
+				lengths.push(bezier.magnitude); 
+				totalLength+=bezier.magnitude; 
+				beziers.push(bezier); 
+			}
+			
+			/*
+			if(points.length)
+			
 			// the last point in the chain, so to speak
 			var lastPoint : Vector3;
 			 
@@ -45,15 +73,18 @@
 			lengths.push(bezier.magnitude); 
 			totalLength += bezier.magnitude; 
 			trace(beziers); 
-			
+			*/
 		}
 		
 		public function createLoop() : void
 		{
 			//var lastBezier : Bezier3 = beziers[beziers.length-1];
-			var firstBezier : Bezier3 = beziers[0];
+			//var firstBezier : Bezier3 = beziers[0];
 			//lastBezier.p2 = firstBezier.p1; 
-			addPoint(firstBezier.p1); 
+			//addPoint(firstBezier.p1); 
+			
+			beziers.push(new Bezier3(points[points.length-1], controlPoints2[points.length-1], points[0], controlPoints1[0]));
+		
 		}
 		
 		public function smooth(smoothAmount : Number = 4) : void
@@ -159,9 +190,9 @@
 			
 				
 		}
-		public function renderXZ(g : Graphics, iterations : int = 100) : void
+		public function renderXZ(g : Graphics, iterations : int = 100, lineColour : int = 0xffffff, lineWeight : Number = 1, drawControlPoints : Boolean = false) : void
 		{
-			//g.lineStyle(1,0xffffff); 
+			g.lineStyle(lineWeight, lineColour,1, false, LineScaleMode.NONE); 
 			var bez : Bezier3 = beziers[0]; 
 			g.moveTo(bez.p1.x, bez.p1.z);
 			for(var i : Number = 0; i<=iterations; i+=1)
@@ -174,19 +205,37 @@
 			g.lineTo(bez.p2.x, bez.p2.z);
 	
 			
-			/*
-			for each(var b : Bezier3 in beziers)
+			if(drawControlPoints)
 			{
-				g.lineStyle(1,0xff0000);
-				g.moveTo(b.p1.x, b.p1.z);
-				g.lineTo(b.c1.x, b.c1.z); 				
-				g.lineStyle(1,0x00ff00);
-				g.moveTo(b.p2.x, b.p2.z);
-				g.lineTo(b.c2.x, b.c2.z); 				
-
-			}*/
+				for (i =0 ; i< points.length; i++)
+				{
+					var p1 : Vector3 = points[i];
+					var c1 : Vector3 = controlPoints1[i];
+					 
+					
+					g.beginFill(0xffffff); 
+					g.drawCircle(p1.x, p1.z, 4);
+					
+					g.lineStyle(0,0xff0000,0.5);
+					g.moveTo(p1.x, p1.z);
+					g.lineTo(c1.x, c1.z); 
+					g.drawCircle(c1.x, c1.z, 2);			
+					
+					if(i>0)
+					{
+						var c2 : Vector3 = controlPoints2[i-1]; 
+					
+						g.lineStyle(0,0x00ff00, 0.5);
+						g.moveTo(p1.x, p1.z);
+						g.lineTo(c2.x, c2.z); 
+						g.drawCircle(c2.x, c2.z, 2);			
+					}			
+	
+				}
+			}
 		}
 		
+		/*
 		public function getClosestPoint(sourceVector : Vector3, iterations : int = 100) : Vector3
 		{
 			//trace("getClosestPoint");
@@ -213,7 +262,22 @@
 			//trace("");
 			return closestPoint; 
 		}
+		*/
 
+		public function multiplyEq(v : Number) : void
+		{
+			for(var i : int = 0; i< points.length; i++)
+			{
+				var p1 : Vector3 = points[i];
+				var c1 : Vector3 = controlPoints1[i];
+				var c2 : Vector3 = controlPoints2[i];
+				p1.multiplyEq(v); 
+				c1.multiplyEq(v); 
+				c2.multiplyEq(v); 
+				
+			}
+			
+		}
 		
 	}
 }
