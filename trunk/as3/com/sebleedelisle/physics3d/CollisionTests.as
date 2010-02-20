@@ -16,12 +16,17 @@ com.sebleedelisle.physics3d
 		{
 			var a : Number, b : Number, c : Number, dist : Number, t : Number;
 			
+			//at2 + bt + c = 0;
+			//sqrd(dx2-dx1)+sqrd(dy2-dy1) * t2 + 2*(x1*(dx1-dx2)+x2*(dx2-dx1)+y1*(dy1-dy2)+y2*(dy2-dy1)) * t  + sqrd(x2-x1)+sqrd(y2-y1)-sqrd(dist);
+
 			dist = r1+r2;
 			
 			a = sqrd(dx2-dx1)+sqrd(dy2-dy1);
 			b = 2*(x1*(dx1-dx2)+x2*(dx2-dx1)+y1*(dy1-dy2)+y2*(dy2-dy1));
 			c = sqrd(x2-x1)+sqrd(y2-y1)-sqrd(dist);
+			
 			t = (-b-Math.sqrt((sqrd(b))-(4*a*c)))/(2*a);
+			//t = (-b+Math.sqrt((sqrd(b))-(4*a*c)))/(2*a);
 			
 			if (t && t>0 && t<1) 
 			{

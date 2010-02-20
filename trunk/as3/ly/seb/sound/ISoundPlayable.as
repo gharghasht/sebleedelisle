@@ -1,0 +1,1 @@
+package ly.seb.sound{	public interface ISoundPlayable	{		 function playSound(vol:Number=1, pan:Number=0, offset:uint = 0) : void ;	}}
