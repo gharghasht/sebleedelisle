@@ -1,16 +1,14 @@
 package ly.seb.simplarexamples
 {
-	import ly.seb.simplar.SimplarBase;
-	
+	import ly.seb.simplar.SimplARBase;
 	import org.papervision3d.objects.primitives.Sphere;
-	
 	
 	[SWF (width="640", height="480", backgroundColor="0x000000",frameRate="30")]	
 
-	public class AR_Sphere extends SimplarBase
+	public class SimplAR_Sphere1 extends SimplARBase
 	{
 		
-		override public function initialise() : void
+		override public function add3dObjects() : void
 		{
 			// make a sphere
 			var sphere : Sphere = new Sphere(null, 40); 

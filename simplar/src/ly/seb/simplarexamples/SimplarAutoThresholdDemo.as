@@ -3,16 +3,20 @@ package ly.seb.simplarexamples
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.events.Event;
-	import ly.seb.simplar.SimplarBase;
+	import ly.seb.simplar.SimplARBase;
 	
 	[SWF (width="960", height="480", backgroundColor="0x000000",frameRate="30")]	
 
-	public class ThresholdDemo extends SimplarBase
+	
+	// This file is to show how the automatic threshold detection works
+	// it's not meant for production purposes. 
+	
+	public class SimplarAutoThresholdDemo extends SimplARBase
 	{
 		public var thresholdBitmap : BitmapData;
 
 		
-		public function ThresholdDemo()
+		public function SimplarAutoThresholdDemo()
 		{
 			super();
 			
