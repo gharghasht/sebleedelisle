@@ -17,17 +17,10 @@ package ly.seb.simplarexamples
 
 	[SWF (width="640", height="480", backgroundColor="0x000000",frameRate="30")]	
 
-	public class SimplAR_DAE2 extends SimplARBase
+	public class SimplAR4_DaeFading extends SimplARBase
 	{
 		public var dae : DAE; 
-		public var shadowPlane : Plane;
 
-		[Embed (source="/../assets/envmap-livingroom.jpg")]
-		private var EnvMap : Class; 
-		
-		[Embed (source="/../assets/torusshadow.jpg")]
-		private var ShadowBitmap : Class; 
-	
 		override public function add3dObjects():void
 		{
 			dae = new DAE(); 
