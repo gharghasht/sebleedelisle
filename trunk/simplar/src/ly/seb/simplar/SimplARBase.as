@@ -1,6 +1,8 @@
 package ly.seb.simplar 
 {
 	
+	//with thanks to thesven.com who's Alchemy FlarToolkit code I adapted.
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
