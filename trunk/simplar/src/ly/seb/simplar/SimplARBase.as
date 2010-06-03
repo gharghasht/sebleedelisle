@@ -35,7 +35,7 @@ package ly.seb.simplar
 	public class SimplARBase extends BasicView 
 	{
 		//this points to the pattern marker which needs to be in the root of the Flex project
-		[Embed(source="../patt.sample1", mimeType="application/octet-stream")]
+		[Embed(source="../seb_ly.patt", mimeType="application/octet-stream")]
 		private var MarkerPattern:Class;
 
 		//FLAR variables
