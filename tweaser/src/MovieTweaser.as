@@ -23,15 +23,15 @@ package
 		public function enterFrame(e : Event) : void
 		{
 			update(); 
-			
-			for (var i : String in tweasers) 
-			{
-				var tweaser : Tweasable = tweasers[i];
-				
-				if(tweaser is NumberTweaser)
-					clip[i] = NumberTweaser(tweaser).current; 
-				
-			}
+//			
+//			for (var i : String in tweasers) 
+//			{
+//				var tweaser : Tweasable = tweasers[i];
+//				
+//				if(tweaser is NumberTweaser)
+//					clip[i] = NumberTweaser(tweaser).current; 
+//				
+//			}
 			
 		}
 		
@@ -51,6 +51,20 @@ package
 		public function set y(n : Number) : void
 		{
 			tweasers["y"].target = n; 
+		}
+		
+		
+		override public function addNumberTweaser(label : String, value : Number = 0) : NumberTweaser
+		{
+			var tweaser : NumberTweaser = super.addNumberTweaser(label, value); 
+			tweaser.updateFunction = updateProperty; 
+			tweaser.updateFunctionArg = label; 
+			
+		}
+		
+		public function updateProperty(value : Number, propname : String) : void
+		{
+			clip[propname] = value; 
 		}
 //	
 	

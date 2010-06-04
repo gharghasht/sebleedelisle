@@ -22,6 +22,7 @@ package
 			addChild(myClip1); 
 			addChild(myClip2); 
 			
+			
 			with (myClip1.graphics) 
 			{
 				beginFill(0xff0000); 
