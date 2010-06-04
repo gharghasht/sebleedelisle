@@ -5,7 +5,7 @@ package
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
 	
-	public class TweaserGroup extends EventDispatcher implements Tweasable 
+	public class TweaserGroup extends EventDispatcher implements ITweasable 
 	{
 		public var tweasers : Dictionary = new Dictionary(); 
 		private var atRest : Boolean = false; 
@@ -17,21 +17,27 @@ package
 		
 		public function update() : Boolean
 		{
-			var active : Boolean  = false;
+			var moving : Boolean  = false;
+			
 			for (var i : String in tweasers) 
 			{
-				var tweaser : Tweasable = tweasers[i];
-				active = tweaser.update() || active; 
+				var tweaser : ITweasable = tweasers[i];
+				moving = tweaser.update() || moving; 
 					
 			}
 			
-			if(!active && !atRest)
+			if(atRest && moving)
+			{
+				//broadcast started message!
+				atRest = false; 
+			}
+			else if(!moving && !atRest)
 			{
 				atRest = true; 
 				// broadcast atRest message
 			}
 			
-			return atRest; 
+			return !atRest; 
 		}
 		
 		public function destroy() : void
