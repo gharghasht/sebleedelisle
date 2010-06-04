@@ -39,9 +39,9 @@ package
 			
 		}
 		
-		public function addNumberTweaser(label : String, value : Number) : void
+		public function addNumberTweaser(label : String, value : Number) : NumberTweaser
 		{
-			tweasers[label] = new NumberTweaser(value); 
+			return tweasers[label] = new NumberTweaser(value); 
 			
 		}
 		

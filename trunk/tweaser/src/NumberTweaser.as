@@ -7,6 +7,10 @@ package
 		public var target : Number; 
 		public var tolerance : Number = 0.001; 
 		public var speed : Number = 0.2; 
+		public var updateFunction : Function; 
+		public var updateFunctionArg : *; 
+		
+		public var atRest : Boolean = true; 
 		
 		public function NumberTweaser(value : Number = 0)
 		{
@@ -15,21 +19,23 @@ package
 		
 		public function update() : Boolean
 		{
-			var atrest : Boolean = true; 
+			
 			var diff : Number = target - current;
 			
 			//trace(diff); 
 			if(Math.abs(diff) > tolerance)
 			{
 				current += diff*speed; 
-				atrest = false; 
+				atRest = false; 
 			}
-			else
+			else if(!atRest)
 			{
-				current = target; 
+				atRest = true; 
+				current = target;
+				if(updateFunction) updateFunction.apply(current, updateFunctionArg); 
 			}
 			
-			return atrest; 
+			return atRest; 
 						
 		}
 	}
