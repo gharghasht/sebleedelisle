@@ -15,6 +15,8 @@ package
 			addNumberTweaser("x", clip.x); 
 			addNumberTweaser("y", clip.y); 
 			addNumberTweaser("rotation", clip.rotation); 
+			addNumberTweaser("scaleX", clip.scaleX);
+			addNumberTweaser("scaleY", clip.scaleY);
 			
 			clip.addEventListener(Event.ENTER_FRAME, enterFrame); 
 			
@@ -22,17 +24,9 @@ package
 
 		public function enterFrame(e : Event) : void
 		{
-			update(); 
-//			
-//			for (var i : String in tweasers) 
-//			{
-//				var tweaser : Tweasable = tweasers[i];
-//				
-//				if(tweaser is NumberTweaser)
-//					clip[i] = NumberTweaser(tweaser).current; 
-//				
-//			}
+			var changed : Boolean = update();
 			
+			clip.alpha = changed ? 1 : 0.7; 
 		}
 		
 		override public function destroy() : void
@@ -52,14 +46,24 @@ package
 		{
 			tweasers["y"].target = n; 
 		}
+		public function set scaleX(n : Number) : void
+		{
+			tweasers["scaleX"].target = n; 
+		}
+		public function set scaleY(n : Number) : void
+		{
+			tweasers["scaleY"].target = n; 
+		}
 		
 		
-		override public function addNumberTweaser(label : String, value : Number = 0) : NumberTweaser
+		
+		override public function addNumberTweaser(label : String, value : Number ) : NumberTweaser
 		{
 			var tweaser : NumberTweaser = super.addNumberTweaser(label, value); 
 			tweaser.updateFunction = updateProperty; 
 			tweaser.updateFunctionArg = label; 
 			
+			return tweaser;
 		}
 		
 		public function updateProperty(value : Number, propname : String) : void

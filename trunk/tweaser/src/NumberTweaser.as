@@ -1,42 +1,93 @@
 package
 {
-	public class NumberTweaser implements Tweasable
+	public class NumberTweaser implements ITweasable
 	{
 		
 		public var current : Number; 
 		public var target : Number; 
+		public var vel : Number = 0;
+		
 		public var tolerance : Number = 0.001; 
 		public var speed : Number = 0.2; 
+		
+		protected var spring : Number = 0; 
+		
 		public var updateFunction : Function; 
 		public var updateFunctionArg : *; 
 		
 		public var atRest : Boolean = true; 
 		
-		public function NumberTweaser(value : Number = 0)
+		public function NumberTweaser(value : Number = 0, speed : Number = 0.2, spring : Number = 0, autoUpdate : Boolean = false)
 		{
 			current = target = value; 
+			this.speed = speed; 
+			this.spring = spring;  
+			
 		}
+		
+		// update returns true if its still moving
 		
 		public function update() : Boolean
 		{
+			var diff : Number; 
+			var changed : Boolean = false; 
 			
-			var diff : Number = target - current;
+			if((target==current) && (vel==0)) return true; 
 			
-			//trace(diff); 
-			if(Math.abs(diff) > tolerance)
+			diff = target - current;
+			
+//			if(!springy)
+//			{
+//				// fast version of : if(Math.abs(diff) > tolerance)
+//				if((diff > 0 ? diff : -diff) > tolerance)
+//				{
+//					current += diff*speed; 
+//					atRest = false; 
+//					
+//					changed = true; 
+//				}
+//				else if(!atRest)
+//				{
+//					atRest = true; 
+//					current = target;
+//					changed = true; 	
+//				}
+//			}
+//			else
+//			{
+				vel*=spring; 
+				
+				if(((diff > 0 ? diff : -diff)>tolerance) || ((vel > 0 ? vel : -vel) > tolerance))
+				{
+					diff*=speed;
+					vel+=diff; 
+					current+=vel; 
+					atRest=false;
+					
+					changed = true; 
+				}
+				else if(!atRest)
+				{
+					atRest = true; 
+					current = target; 
+					vel = 0;
+					
+					changed = true; 
+				}
+			//}
+		
+			if((changed) && (updateFunction!=null))
 			{
-				current += diff*speed; 
-				atRest = false; 
-			}
-			else if(!atRest)
-			{
-				atRest = true; 
-				current = target;
-				if(updateFunction) updateFunction.apply(current, updateFunctionArg); 
+				updateFunction(current, updateFunctionArg); 
 			}
 			
-			return atRest; 
+			return !atRest; 
 						
+		}
+		
+		public function get springy() : Boolean
+		{
+			return spring>0; 
 		}
 	}
 }

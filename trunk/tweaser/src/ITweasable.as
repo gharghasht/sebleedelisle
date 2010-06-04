@@ -1,6 +1,6 @@
 package
 {
-	public interface Tweasable
+	public interface ITweasable
 	{
 		function update() : Boolean; 	
 	}

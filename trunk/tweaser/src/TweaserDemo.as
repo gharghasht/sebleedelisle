@@ -7,7 +7,7 @@ package
 	
 	[SWF (width="640", height="480", backgroundColor="0x000000",frameRate="30")]	
 	
-	public class Tweaser extends Sprite
+	public class TweaserDemo extends Sprite
 	{
 		
 		public var myClip1 : MovieClip; 
@@ -15,7 +15,7 @@ package
 		public var movieTweaser1 : MovieTweaser; 
 		public var movieTweaser2 : MovieTweaser; 
 		
-		public function Tweaser()
+		public function TweaserDemo()
 		{
 			myClip1 = new MovieClip(); 
 			myClip2 = new MovieClip(); 
@@ -46,7 +46,14 @@ package
 			movieTweaser2.y = 200; 
 			
 			stage.addEventListener(MouseEvent.MOUSE_DOWN, mouseDown); 
-			
+			addEventListener(Event.ENTER_FRAME, enterFrame) ; 
+		}
+		
+		public function enterFrame(e : Event) : void
+		{
+			movieTweaser1.x = 640 - mouseX; 
+			movieTweaser1.y = mouseY; 
+			movieTweaser1.rotation = mouseX*0.5 + mouseY *0.5; 
 		}
 		
 		
@@ -55,6 +62,7 @@ package
 			movieTweaser2.x = mouseX; 
 			movieTweaser2.y = mouseY; 
 			movieTweaser2.rotation = mouseX*0.5 + mouseY *0.5; 
+			movieTweaser2.scaleX = movieTweaser2.scaleY = Math.random(); 
 		}
 	}
 }
