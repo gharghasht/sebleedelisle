@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="TweaserDemo.as" projectUUID="f0d5c4b6-d067-4084-8b8f-f9e6e0b6c0ca" version="6">
-  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+<actionScriptProperties mainApplicationPath="ly/seb/tweaserdemos/FlashNative3D.as" projectUUID="f0d5c4b6-d067-4084-8b8f-f9e6e0b6c0ca" version="6">
+  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="false" copyDependentFiles="true" flexSDK="Flex 4.0" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -28,7 +28,8 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="TweaserDemo.as"/>
+    <application path="ly/seb/tweaserdemos/FlashNative3D.as"/>
+    <application path="ly/seb/tweaserdemos/TweaserDemo.as"/>
   </applications>
   <modules/>
   <buildCSSFiles/>
