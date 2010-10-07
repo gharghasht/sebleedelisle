@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="ly/seb/simplar/SimplARBase.as" projectUUID="3e43bc1f-bc48-4c6b-8794-b06cc1f1f3c5" version="6">
+<actionScriptProperties analytics="false" mainApplicationPath="ly/seb/simplarexamples/SimplAR5_RacingCar.as" projectUUID="3e43bc1f-bc48-4c6b-8794-b06cc1f1f3c5" version="6">
   <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="true" flexSDK="Flex 4.0" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
@@ -29,6 +29,9 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="ly/seb/simplarexamples/SimplAR5_RacingCar.as"/>
+    <application path="ly/seb/arwormhole/ARSpeaker.as"/>
+    <application path="ly/seb/arwormhole/ARWormhole.as"/>
     <application path="ly/seb/simplarexamples/SimplAR1_Basic.as"/>
     <application path="ly/seb/simplarexamples/SimplAR4_DaeFading.as"/>
     <application path="ly/seb/simplarexamples/SimplarAutoThresholdDemo.as"/>
